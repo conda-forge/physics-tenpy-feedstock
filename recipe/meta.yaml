@@ -1,5 +1,5 @@
 {% set name = "physics-tenpy" %}
-{% set version = "0.6.1" %}
+{% set version = "0.7.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e8239ef7636260cd459c18840b9ba25129f1129344ee1556fdb15faee5f7c0f8 
+  sha256: 0538024ed6e6022823eac0522bf0d8a6fcd28ee471b809fb630e9f9d21194399
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py<35]
 
 requirements:
@@ -47,7 +47,7 @@ about:
   license: GPL-3.0-only
   license_family: GPL
   license_file: LICENSE
-  summary: "Simulation of quantum many-body systems with tensor networks in Python"
+  summary: Simulation of quantum many-body systems with tensor networks in Python
   description: |
     "TeNPy is a package of Python code for the simulation of quantum many-body systems with tensor networks.
     Amongst others, it includes codes for the density matrix renormalization group (DMRG) algorithm
