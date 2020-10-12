@@ -1,5 +1,5 @@
 {% set name = "physics-tenpy" %}
-{% set version = "0.7.1" %}
+{% set version = "0.7.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 0538024ed6e6022823eac0522bf0d8a6fcd28ee471b809fb630e9f9d21194399
+  sha256: f6a701e31e48b9e1486a5781f6ca795f5f60f6d892c68f92cccdc8b2da73bb20
 
 build:
   number: 0
