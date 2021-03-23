@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
-  skip: true  # [py<35]
+  skip: true  # [py<36]
 
 requirements:
   build:
@@ -23,10 +23,14 @@ requirements:
     - cython >=0.29
     - numpy >=1.13
     - scipy >=0.18
+    - mkl
+    - mkl-devel
   run:
     - python
     - {{ pin_compatible('numpy') }}
     - scipy >=0.18
+    - mkl
+    - libblas * *mkl
     - bottleneck
     - pyyaml
     - h5py
