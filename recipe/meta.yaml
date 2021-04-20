@@ -10,7 +10,7 @@ source:
   sha256: 9314bdc3287b963744e8317b7ce5f39d27f492235712ec8a79de07f61652a653
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py<36]
   skip: true  # [python_impl == 'pypy']
@@ -24,13 +24,10 @@ requirements:
     - cython >=0.29
     - numpy >=1.16
     - scipy >=1.2
-    - mkl  # [not win]
   run:
     - python
     - {{ pin_compatible('numpy') }}
     - scipy >=1.2
-    - mkl  # [not win]
-    - libblas * *mkl  # [not win]
     - bottleneck
     - pyyaml
     - h5py
