@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
-  skip: true  # [py<36]
+  skip: true  # [py<37]
   skip: true  # [python_impl == 'pypy']
 
 requirements:
@@ -35,7 +35,7 @@ requirements:
 test:
   source_files:
     - tests
-    - setup.cfg
+    - pyproject.toml
   requires:
     - pytest
   imports:
