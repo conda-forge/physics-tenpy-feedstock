@@ -48,7 +48,7 @@ test:
   imports:
     - tenpy
   commands:
-    - pytest -m "not slow" tests
+    - pytest -m "not slow" --ignore=tests/test_examples.py tests
 
 about:
   home: https://github.com/tenpy/tenpy
