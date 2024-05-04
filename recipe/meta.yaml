@@ -1,13 +1,13 @@
 {% set name = "physics-tenpy" %}
-{% set version = "1.0.0" %}
+{% set version = "1.0.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 1ba4cd623e4f276bece2f1ceb982e6a3e77af10d01f0f3d7c6e89ae4df99ac26
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 04dd468ba641e7c2f2bc8530baec980328af0ac9857668f2fefefaadfc1499a4
 
 build:
   number: 0
@@ -24,6 +24,7 @@ requirements:
     - scipy                                  # [build_platform != target_platform]
     - pip                                    # [build_platform != target_platform]
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
   host:
     - pip
     - python
