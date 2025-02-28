@@ -52,9 +52,9 @@ test:
 
 about:
   home: https://github.com/tenpy/tenpy
-  license: GPL-3.0-only
-  license_family: GPL
+  license: Apache-2.0
   license_file: LICENSE
+  license_url: https://www.apache.org/licenses/LICENSE-2.0
   summary: Simulation of quantum many-body systems with tensor networks in Python
   description: |
     "TeNPy is a package of Python code for the simulation of quantum many-body systems with tensor networks.
