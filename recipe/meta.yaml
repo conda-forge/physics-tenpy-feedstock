@@ -1,5 +1,5 @@
 {% set name = "physics-tenpy" %}
-{% set version = "1.0.2" %}
+{% set version = "1.0.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: aac474a6a400e4a6dc91715542a846b6aaae0aa596a42cd173462a6a08b3e20e
+  sha256: 078c2fb5f466370d49761af7d6b887ae633255ce09d1b3f9fd51497584214fac
 
 build:
   number: 0
@@ -33,8 +33,11 @@ requirements:
     - scipy
   run:
     - python
-    - {{ pin_compatible('numpy') }}
-    - {{ pin_compatible('scipy') }}
+    # 2025-03: scipy.linalg.expm implemented in C from version 1.15 fails tests on windows
+    # see https://github.com/scipy/scipy/issues/22558
+    # hence I pin them here to scipy < 1.15 for win
+    - scipy <1.15      # [win]
+    - scipy            # [not win]
     - bottleneck
     - pyyaml
     - h5py
@@ -53,9 +56,9 @@ test:
 
 about:
   home: https://github.com/tenpy/tenpy
-  license: GPL-3.0-only
-  license_family: GPL
+  license: Apache-2.0
   license_file: LICENSE
+  license_url: https://www.apache.org/licenses/LICENSE-2.0
   summary: Simulation of quantum many-body systems with tensor networks in Python
   description: |
     "TeNPy is a package of Python code for the simulation of quantum many-body systems with tensor networks.
