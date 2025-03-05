@@ -33,7 +33,11 @@ requirements:
     - scipy
   run:
     - python
-    - {{ pin_compatible('scipy') }}
+    # 2025-03: scipy.linalg.expm implemented in C from version 1.15 fails tests on windows
+    # see https://github.com/scipy/scipy/issues/22558
+    # hence I pin them here to scipy < 1.15 for win
+    - scipy <1.15      # [win]
+    - scipy            # [not win]
     - bottleneck
     - pyyaml
     - h5py
