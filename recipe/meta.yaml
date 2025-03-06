@@ -22,10 +22,12 @@ requirements:
     - numpy                                  # [build_platform != target_platform]
     - scipy                                  # [build_platform != target_platform]
     - pip                                    # [build_platform != target_platform]
+    - setuptools                             # [build_platform != target_platform]
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
   host:
     - pip
+    - setuptools
     - python
     - cython
     - numpy
