@@ -9,10 +9,23 @@ source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
   sha256: 5a382a10e4f91ba6a5afd1fb06f065b01a84e590d9ea96057cd0aa1b2b2be119
 
+
+# [1] notes on windows builds (28 oct 2025):
+#     - There is a known bug affecting `1.15 <= scipy < 1.15.3` on windows.
+#       See https://github.com/scipy/scipy/issues/22558
+#       We make sure to exclude these scipy versions explicitly
+#     - There are unknown bugs somewhere in scipy/numpy, probably the underlying MKL that cause
+#       our tests to fail (lanczos does not converge, np.linalg.eigh raises not converged), only
+#       on numpy and only for python 3.10 and 3.11 (<3.10 not tested, end of life).
+#       This could probably be resolved by carefully excluding package versions, but I dont have
+#       capacity to diagnose which versions cause the problems, and I want to publish for 3.14 ASAP
+
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [python_impl == 'pypy']
+  # restrict python version for windows: see note [1] above
+  skip: true  # [win and py<312]
 
 requirements:
   build:
@@ -20,7 +33,9 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
-    - scipy                                  # [build_platform != target_platform]
+    # restrict scipy version for windows: see note [1] above
+    - scipy >=1.15.3                         # [build_platform != target_platform and win]
+    - scipy                                  # [build_platform != target_platform and not win]
     - pip                                    # [build_platform != target_platform]
     - setuptools                             # [build_platform != target_platform]
     - {{ compiler('cxx') }}
@@ -31,14 +46,14 @@ requirements:
     - python
     - cython
     - numpy
-    - scipy
+    # restrict scipy version for windows: see note [1] above
+    - scipy >=1.15.3            # [win]
+    - scipy                     # [not win]
   run:
     - python
-    # 2025-03: scipy.linalg.expm implemented in C from version 1.15 fails tests on windows
-    # see https://github.com/scipy/scipy/issues/22558
-    # hence I pin them here to scipy < 1.15 for win
-    - scipy <1.15      # [win]
-    - scipy            # [not win]
+    # restrict scipy version for windows: see note [1] above
+    - scipy >=1.15.3            # [win]
+    - scipy                     # [not win]
     - bottleneck
     - pyyaml
     - h5py
