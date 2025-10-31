@@ -1,5 +1,5 @@
 {% set name = "physics-tenpy" %}
-{% set version = "1.0.6" %}
+{% set version = "1.0.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 5a382a10e4f91ba6a5afd1fb06f065b01a84e590d9ea96057cd0aa1b2b2be119
+  sha256: 8a6ff318844ac57ae2ca893a5b2d4239eccb3ed11ab0863314ea5260510a27ac
 
 
 # [1] notes on windows builds (28 oct 2025):
@@ -21,7 +21,7 @@ source:
 #       capacity to diagnose which versions cause the problems, and I want to publish for 3.14 ASAP
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [python_impl == 'pypy']
   # restrict python version for windows: see note [1] above
