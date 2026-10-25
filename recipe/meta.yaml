@@ -25,7 +25,7 @@ build:
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [python_impl == 'pypy']
   # restrict python version for windows: see note [1] above
-  skip: true  # [win and py<312]
+  skip: true  # [py<312]
 
 requirements:
   build:
